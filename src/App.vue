@@ -1,33 +1,47 @@
 <template>
   <div id="app" class="container">
-    <h1>Vue JS</h1>
+    <h1>Forma padrão</h1>
+      <PostsLista :posts="posts"/>
     <!-- distribuiçao ou projecao de conteudo SLOT-->
-    <Post>
-      <h2 slot="cabecalho">Components no Vue</h2>
+
+    <hr>
+
+    <h2>Slots com escopo</h2>
+    <PostsLista :posts="posts"
+        v-slot="{ meuPost }">
+        <!-- desestruturação { meuPost } -->
+        <h2> {{ meuPost.titulo }}</h2>
+        <p> {{ meuPost.conteudo }}</p>
+        <small> {{ meuPost.autor }}</small>
+      <!-- <h2 slot="cabecalho">Components no Vue</h2> -->
       
       <!-- todo esse trecho abaixo que não está em algum slot específico será colocado dentro do slot default no post.vue -->
-      <p class='aplica-cor'>Components são uma das peças mais importantes no Vue</p>
-      <span>...</span>
+      <!-- <p class='aplica-cor'></p>
+      <span>...</span> -->
   
-      <small slot="rodape">Por {{ autor }}</small>
+      <!-- <small slot="rodape">Por {{ autor }}</small> -->
 
       <!-- se eu nao tivesse o template abaixo iria colocar o texto padrao q eu decidi dentro do slot botão no component Post.vue -->
       <!-- vou deixar comentado abaixo, para utilizar o valor default (ler mais)-->
       <!-- <template slot="botao">Detalhes...</template> -->
-    </Post>
+    </PostsLista>
   </div>
 </template>
 
 <script>
-import Post from './components/Post.vue'
+import PostsLista from './components/PostsLista.vue'
 
 export default {
   components: {
-    Post
+    PostsLista
   },
   data(){
     return{
-      autor:" Ponqueli "
+       posts:[{
+         id:1, titulo:"Components no Vue", conteudo:"Components são uma das peças mais importantes no Vue", autor: "Ponqueli"
+       },{
+         id:2, titulo:"Distribuindo conteúdo com slots", conteudo:"Slots podem ser usados como conteúdos de código HTML", autor: "Ponqueli"
+       }]
     }
   }
 }

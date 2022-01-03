@@ -1,19 +1,28 @@
 <template>
     <div class="post">
         <div class="post-cabecalho">
-            <slot name="cabecalho"></slot>
+            <h2 name="cabecalho">{{ post.titulo }}</h2>
         </div>
         <div class="post-conteudo">
-            <slot></slot>
+            <p> {{ post.conteudo }} </p>
         </div>
         <div class="post-rodape">
-            <slot name="rodape"></slot>
-            <a href="#" class='link'>
-                <slot name="botao">Ler mais...</slot>
-            </a>
+            <small name="rodape">{{ post.autor }}</small>
+            <a href="#" class='link'>Ler mais...</a>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    props:{
+        post:{
+            type: Object,
+            required: true
+        }
+    }
+}
+</script>
 
 <style scoped>
     .post{
