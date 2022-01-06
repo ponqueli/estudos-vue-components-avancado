@@ -25,7 +25,7 @@ import Sobre from './components/Sobre.vue'
 
 const Contato = {
   render: h =>h({
-    name:"Blablabla",
+    name:"ContatoDados",
     template: '<h2>Componente anônimo</h2>'
   })
 }
