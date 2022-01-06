@@ -4,6 +4,8 @@
     <button @click="componentSelecionado = 'Home'">Home</button>
     <button @click="componentSelecionado = 'PostsLista'">Posts</button>
     <button @click="componentSelecionado = 'Sobre'">Sobre</button>
+    <button @click="componentSelecionado = 'Assincrono'">Assíncrono</button>
+    <button @click="componentSelecionado = 'Contato'">Contato</button>
     
     <!--:max="2" mantem 2 instâncias. Se tiver 3 destroi a que usou menos-->
     <keep-alive :include="/Home|Sobre/">
@@ -21,8 +23,27 @@ import PostsLista from './components/PostsLista.vue'
 import Home from './components/Home.vue'
 import Sobre from './components/Sobre.vue'
 
+const Contato = {
+  render: h =>h({
+    name:"Blablabla",
+    template: '<h2>Componente anônimo</h2>'
+  })
+}
+
 export default {
   components:{
+    Assincrono: () => ({
+      component: new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(import('./components/Assincrono.vue'))  
+        }, 2000);
+      }),
+      loading:{ template:'<p>Carregando...</p>'},
+      error: {template:' <p> Erro ao carregar component </p>'},
+      delay: 200,
+      timeout: 3000
+    }),
+    Contato,
     Home,
     Sobre,
     PostsLista
